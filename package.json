@@ -1,0 +1,14 @@
+{
+  "name": "webmessage",
+  "version": "0.0.0",
+  "description": "Send iMessages from a web browser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wtfaremyinitials/webmessage.git"
+  },
+  "private": true,
+  "dependencies": {
+    "express": "^4.10.2",
+    "osa-imessage": "0.0.0"
+  }
+}

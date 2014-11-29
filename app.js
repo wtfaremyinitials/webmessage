@@ -8,10 +8,6 @@ var port = process.env.PORT || 5677;
 app.use(require('body-parser').json());
 app.use(require('body-parser').urlencoded({ extended: true }));
 
-app.get('/', function(req, res) {
-    res.end('Hello World');
-});
-
 app.post('/send', function(req, res){
     var to = req.body.to;
     var message = req.body.message;

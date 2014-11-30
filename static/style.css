@@ -83,3 +83,13 @@ html {
 .last {
     color: #787878;
 }
+
+.compose {
+    width: calc(100% - 271px);
+    height: 40px;
+    border-top: 1px solid #E3E3E3;
+    color: #F7F7F7;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}

@@ -85,11 +85,23 @@ html {
 }
 
 .compose {
-    width: calc(100% - 271px);
-    height: 40px;
+    width: calc(100% - 271px - 16px);
+    height: calc(40px - 16px);
     border-top: 1px solid #E3E3E3;
-    color: #F7F7F7;
+    background-color: #F7F7F7;
     position: absolute;
     bottom: 0px;
     right: 0px;
+    padding: 8px;
+}
+
+.compose input {
+    width: calc(100% - 43px);
+    height: 22px;
+    margin-left: 6px;
+    border: 1px solid #DEDEDE;
+    border-radius: 4px;
+    outline: none;
+    font-size: 13px;
+    padding-left: 7px;
 }

@@ -112,13 +112,17 @@ html {
 }
 
 .messages li {
-
+    width: 100%;
+    min-height: 20px;
 }
 
-.messages li.you {
+
+.message.you {
     background-color: #1C8AF2;
+    float: right;
 }
 
-.messages li.them {
+.message.them {
     background-color: #E6E6Eb;
+    float: left;
 }

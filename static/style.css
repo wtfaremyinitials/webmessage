@@ -109,6 +109,8 @@ html {
 .messages {
     list-style: none;
     margin: 0px;
+    margin-left: 271px;
+    padding: 20px;
 }
 
 .messages li {
@@ -116,6 +118,10 @@ html {
     min-height: 20px;
 }
 
+.message {
+    font-size: 13px;
+    padding: 7px;
+}
 
 .message.you {
     background-color: #1C8AF2;

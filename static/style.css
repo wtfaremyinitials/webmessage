@@ -40,6 +40,7 @@ html {
 .conversations li {
     height: 64px;
     width:  100%;
+    cursor: pointer;
 }
 
 .contact {

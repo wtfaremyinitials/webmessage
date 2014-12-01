@@ -1,8 +1,6 @@
 var webmessage = angular.module('webmessage', ['ngRoute']);
 var noop = function(){};
 
-window.host = 'http://localhost:5677';
-
 webmessage.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', {
         templateUrl: 'views/login.html',
@@ -16,7 +14,7 @@ webmessage.config(['$routeProvider', function($routeProvider) {
 
 webmessage.factory('messages', ['$http', function($http) {
     var send = function(message, to) {
-        $http.post(window.host + '/send', { to: to, message: message }).success(function() {
+        $http.post('/send', { to: to, message: message }).success(function() {
             console.log('Message "' + message + '" sent to "' + to + '" successfully.');
         }).catch(noop);
     };

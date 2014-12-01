@@ -1,33 +1,13 @@
 <div class="sidebar">
-    <ul class="conversations">
-        <li class="active">
+    <ul class="conversations" ng-repeat="contact in contacts">
+        <li ng-click="select()" ng-class="{ active: selectedContact == contact.name }">
             <div class="contact">
                 <img src="http://placehold.it/44x44">
                 <div class="info">
-                    <span class="name">Brady Africk</span>
-                    <span class="time">4:43 PM</span>
-                    <span class="last">lol</span>
+                    <span class="name">{{ contact.name }}</span>
+                    <span class="time">{{ contact.time }}</span>
+                    <span class="last">{{ contact.last }}</span>
                 </div>
-            </div>
-        </li>
-        <li>
-            <div class="contact">
-                <img src="http://placehold.it/44x44">
-                <div class="info">
-                    <span class="name">Sarah Tompsidis</span>
-                    <span class="time">3:30 PM</span>
-                    <span class="last">Hahaha</span>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="contact">
-                <img src="http://placehold.it/44x44">
-            </div>
-        </li>
-        <li>
-            <div class="contact">
-                <img src="http://placehold.it/44x44">
             </div>
         </li>
     </ul>

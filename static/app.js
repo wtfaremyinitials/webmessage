@@ -105,11 +105,34 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
 
 webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, messages) {
 
+    $scope.contacts = [
+        {
+            name: 'Brady Africk',
+            time: '4:43 PM',
+            last: 'lol'
+        },
+        {
+            name: 'Sarah Tompsidis',
+            time: '3:30 PM',
+            last: 'Hahaha'
+        },
+        {
+            name: 'Marko Tupanjac',
+            time: '12:11 AM',
+            last: 'Hey is host done?'
+        }
+    ];
+    $scope.selectedContact = '';
+
     $scope.compose = '';
 
     $scope.send = function() {
-        messages.send($scope.compose, 'Brady Africk');
+        messages.send($scope.compose, $scope.selectedContact);
         $scope.compose = '';
+    };
+
+    $scope.select = function() {
+        $scope.selectedContact = this.contact.name;
     };
 
 }]);

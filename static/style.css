@@ -114,3 +114,11 @@ html {
 .messages li {
 
 }
+
+.messages li.you {
+    background-color: #1C8AF2;
+}
+
+.messages li.them {
+    background-color: #E6E6Eb;
+}

@@ -105,3 +105,12 @@ html {
     font-size: 13px;
     padding-left: 7px;
 }
+
+.messages {
+    list-style: none;
+    margin: 0px;
+}
+
+.messages li {
+
+}

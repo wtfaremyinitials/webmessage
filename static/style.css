@@ -73,6 +73,7 @@ html {
 .name {
     font-weight: bold;
     float: left;
+    width: calc(100% - 60px);
 }
 
 .time {

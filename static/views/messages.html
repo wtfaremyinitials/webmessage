@@ -1,12 +1,12 @@
 <div class="sidebar">
-    <ul class="conversations" ng-repeat="contact in contacts">
-        <li ng-click="select()" ng-class="{ active: selectedContact == contact.name }">
+    <ul class="conversations">
+        <li ng-click="select()" ng-class="{ active: selectedConversation == conversation }" ng-repeat="conversation in conversations">
             <div class="contact">
                 <img src="http://placehold.it/44x44">
                 <div class="info">
-                    <span class="name">{{ contact.name }}</span>
-                    <span class="time">{{ contact.time }}</span>
-                    <span class="last">{{ contact.last }}</span>
+                    <span class="name">{{ conversation.name }}</span>
+                    <span class="time">{{ conversation.time }}</span>
+                    <span class="last">{{ conversation.messages[conversation.messages.length-1].text }}</span>
                 </div>
             </div>
         </li>
@@ -15,23 +15,8 @@
 
 <div class="main">
     <ul class="messages">
-        <li class="them">
-            <div class="message them">Hey</div>
-        </li>
-        <li class="you">
-            <div class="message you">Hey</div>
-        </li>
-        <li class="them">
-            <div class="message them">What's up?</div>
-        </li>
-        <li class="you">
-            <div class="message you">Nm. You?</div>
-        </li>
-        <li class="them">
-            <div class="message them">I wanna photoshop something</div>
-        </li>
-        <li class="you">
-            <div class="message you">lol</div>
+        <li ng-repeat="message in selectedConversation.messages">
+            <div class="message" ng-class="{ them: message.side == 'them', you: message.side == 'you' }">{{ message.text }}</div>
         </li>
     </ul>
     <div class="compose">

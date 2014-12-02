@@ -105,34 +105,75 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
 
 webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, messages) {
 
-    $scope.contacts = [
+    $scope.conversations = [
         {
             name: 'Brady Africk',
             time: '4:43 PM',
-            last: 'lol'
+            messages: [
+                {
+                    'text': 'Hey',
+                    'time': '4:43 PM',
+                    'side': 'them'
+                },
+                {
+                    'text': 'Hey',
+                    'time': '4:43 PM',
+                    'side': 'you'
+                },
+                {
+                    'text': 'what\'s up?',
+                    'time': '4:43 PM',
+                    'side': 'them'
+                },
+                {
+                    'text': 'nm, pretty bored. you?',
+                    'time': '4:43 PM',
+                    'side': 'you'
+                },
+                {
+                    'text': 'I wanna photoshop something',
+                    'time': '4:43 PM',
+                    'side': 'them'
+                },
+                {
+                    'text': 'lol',
+                    'time': '4:43 PM',
+                    'side': 'you'
+                },
+                {
+                    'text': 'of course',
+                    'time': '4:43 PM',
+                    'side': 'you'
+                }
+            ]
         },
         {
             name: 'Sarah Tompsidis',
             time: '3:30 PM',
-            last: 'Hahaha'
+            messages: [
+
+            ]
         },
         {
             name: 'Marko Tupanjac',
             time: '12:11 AM',
-            last: 'Hey is host done?'
+            messages: [
+
+            ]
         }
     ];
-    $scope.selectedContact = '';
+
+    $scope.selectedConversation = $scope.conversations[0];
 
     $scope.compose = '';
 
     $scope.send = function() {
-        messages.send($scope.compose, $scope.selectedContact);
+        messages.send($scope.compose, $scope.selectedConversation);
         $scope.compose = '';
     };
 
     $scope.select = function() {
-        $scope.selectedContact = this.contact.name;
+        $scope.selectedConversation = this.conversation;
     };
 
 }]);

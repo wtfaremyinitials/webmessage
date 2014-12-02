@@ -104,67 +104,8 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
 }]);
 
 webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, messages) {
-
-    $scope.conversations = [
-        {
-            name: 'Brady Africk',
-            time: '4:43 PM',
-            messages: [
-                {
-                    'text': 'Hey',
-                    'time': '4:43 PM',
-                    'side': 'them'
-                },
-                {
-                    'text': 'Hey',
-                    'time': '4:43 PM',
-                    'side': 'you'
-                },
-                {
-                    'text': 'what\'s up?',
-                    'time': '4:43 PM',
-                    'side': 'them'
-                },
-                {
-                    'text': 'nm, pretty bored. you?',
-                    'time': '4:43 PM',
-                    'side': 'you'
-                },
-                {
-                    'text': 'I wanna photoshop something',
-                    'time': '4:43 PM',
-                    'side': 'them'
-                },
-                {
-                    'text': 'lol',
-                    'time': '4:43 PM',
-                    'side': 'you'
-                },
-                {
-                    'text': 'of course',
-                    'time': '4:43 PM',
-                    'side': 'you'
-                }
-            ]
-        },
-        {
-            name: 'Sarah Tompsidis',
-            time: '3:30 PM',
-            messages: [
-
-            ]
-        },
-        {
-            name: 'Marko Tupanjac',
-            time: '12:11 AM',
-            messages: [
-
-            ]
-        }
-    ];
-
+    $scope.conversations = JSON.parse(localStorage['conversations']);
     $scope.selectedConversation = $scope.conversations[0];
-
     $scope.compose = '';
 
     $scope.send = function() {
@@ -180,5 +121,9 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
     $scope.select = function() {
         $scope.selectedConversation = this.conversation;
     };
+
+    $scope.$watch('conversations', function(value) {
+        localStorage['conversations'] = JSON.stringify(value);
+    }, true);
 
 }]);

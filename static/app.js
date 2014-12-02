@@ -168,7 +168,12 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
     $scope.compose = '';
 
     $scope.send = function() {
-        messages.send($scope.compose, $scope.selectedConversation);
+        messages.send($scope.compose, $scope.selectedConversation.name);
+        $scope.selectedConversation.messages.push({
+            text: $scope.compose,
+            time: '', // TODO
+            side: 'you'
+        });
         $scope.compose = '';
     };
 

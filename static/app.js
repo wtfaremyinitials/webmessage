@@ -123,7 +123,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
     };
 
     $scope.$watch('conversations', function(value) {
-        localStorage['conversations'] = JSON.stringify(value);
+        localStorage['conversations'] = angular.toJson(value);
     }, true);
 
 }]);

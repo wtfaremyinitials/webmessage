@@ -141,6 +141,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
                     time: '00:00 PM',
                     side: 'them'
                 });
+                $scope.$apply();
             }
         });
     };

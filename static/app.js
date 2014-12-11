@@ -106,6 +106,9 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
 webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, messages) {
     $scope.conversations = JSON.parse(localStorage['conversations']);
     $scope.selectedConversation = $scope.conversations[0];
+    for(var i=0; i<$scope.conversations.length; i++)
+        if($scope.conversations[i].name == sessionStorage['active'])
+            $scope.selectedConversation = $scope.conversations[i];
     $scope.compose = '';
 
     $scope.send = function() {
@@ -119,6 +122,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
     };
 
     $scope.select = function() {
+        sessionStorage['active'] = this.conversation.name;
         $scope.selectedConversation = this.conversation;
     };
 

@@ -10,6 +10,6 @@
   "dependencies": {
     "body-parser": "^1.9.2",
     "express": "^4.10.2",
-    "osa-imessage": "0.0.0"
+    "osa-imessage": "0.0.1"
   }
 }

@@ -130,4 +130,18 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
         localStorage['conversations'] = angular.toJson(value);
     }, true);
 
+    var messageEvents = new EventSource('/receive');
+
+    messageEvents.onmessage = function(msgEvent) {
+        var data = JSON.parse(msgEvent.data);
+        $scope.conversations.forEach(function(conversation) {
+            if(conversation.name == data.from.name) {
+                conversation.messages.push({
+                    text: data.text,
+                    time: '00:00 PM',
+                    side: 'them'
+                });
+            }
+        });
+    };
 }]);

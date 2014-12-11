@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
 
+var sse = require('connect-sse')();
+
 var iMessage = require('osa-imessage');
+
+var messageEvents;
 
 var port = process.env.PORT || 5677;
 
@@ -42,6 +46,14 @@ app.post('/send', function(req, res){
     });
 });
 
+app.get('/receive', sse, function(req, res) {
+    messageEvents.on('received', function(data){
+        res.json(data);
+    });
+});
+
 app.listen(port);
+
+messageEvents = iMessage.listen();
 
 console.log('Server started on port: ' + port);

@@ -55,5 +55,6 @@ app.get('/receive', sse, function(req, res) {
 app.listen(port);
 
 messageEvents = iMessage.listen();
+messageEvents.setMaxListeners(Infinity);
 
 console.log('Server started on port: ' + port);

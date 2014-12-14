@@ -171,3 +171,27 @@ html {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.indicator-container {
+    height: 3px;
+    width: calc(100% - 270px);
+    padding: 0px;
+    margin: 0px;
+    margin-left: 270px;
+}
+
+.indicator {
+    background-color: #4094F7;
+    height: 100%;
+    width: 0%;
+}
+
+.indicator.sending {
+    width: 75%;
+    transition: width 5s;
+}
+
+.indicator.done {
+    width: 100%;
+    transition: width: 0.2s;
+}

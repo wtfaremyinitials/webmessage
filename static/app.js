@@ -28,9 +28,7 @@ webmessage.config(['$routeProvider', function($routeProvider) {
 
 webmessage.factory('messages', ['$http', function($http) {
     var send = function(message, to) {
-        $http.post('/send', { to: to, message: message }).success(function() {
-            console.log('Message "' + message + '" sent to "' + to + '" successfully.');
-        }).catch(noop);
+        return $http.post('/send', { to: to, message: message });
     };
 
     return {
@@ -113,6 +111,17 @@ webmessage.factory('datetime', [function() {
     };
 }]);
 
+// Modified version of http://kylecordes.com/2014/angularjs-q-promise-delayer
+webmessage.factory('delay', ['$timeout', function($timeout) {
+    return function(ms) {
+        return function(value) {
+            return $timeout(function() {
+                return value;
+            }, ms);
+        };
+    };
+}]);
+
 webmessage.factory('httpRequestInterceptor', ['auth', function (auth) {
     return {
         request: function (config) {
@@ -148,7 +157,7 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
 
 }]);
 
-webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', function($scope, messages, datetime) {
+webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', 'delay', function($scope, messages, datetime, delay) {
     $scope.conversations = JSON.parse(localStorage['conversations']);
     $scope.selectedConversation = $scope.conversations[0];
     for(var i=0; i<$scope.conversations.length; i++)
@@ -164,8 +173,17 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', functio
         });
     };
 
+    $scope.done = false;
+    $scope.sending = false;
+
     $scope.send = function() {
-        messages.send($scope.compose, $scope.selectedConversation.name);
+        $scope.sending = true;
+        messages.send($scope.compose, $scope.selectedConversation.name).then(function() {
+            $scope.sending = false;
+            $scope.done  = true;
+        }).then(delay(500)).then(function() {
+            $scope.done = false;
+        });
         var time = Date.now();
         $scope.selectedConversation.messages.push({
             text: $scope.compose,

@@ -17,6 +17,7 @@
 </div>
 
 <div class="main">
+    <div class="indicator-container"><div ng-class="{ indicator: true, done: done, sending: sending }"></div></div>
     <ul class="messages">
         <li ng-repeat="message in selectedConversation.messages">
             <div class="message" ng-class="{ them: message.side == 'them', you: message.side == 'you' }">{{ message.text }}</div>

@@ -11,6 +11,7 @@
     "body-parser": "^1.9.2",
     "connect-sse": "^1.0.6",
     "express": "^4.10.2",
+    "osa-contacts": "^1.0.0",
     "osa-imessage": "0.0.3"
   }
 }

@@ -4,6 +4,7 @@ var app = express();
 var sse = require('connect-sse')();
 
 var iMessage = require('osa-imessage');
+var Contacts = require('osa-contacts');
 
 var messageEvents;
 
@@ -22,6 +23,38 @@ app.use(express.static(__dirname + '/static'));
 
 app.get('/auth', function(req, res) {
     // TODO: Test if the Authentication header is correct
+});
+
+app.get('/profile.jpg', function(req, res) {
+    var name = req.query.name;
+
+
+
+    Contacts.getContacts({ name: name }, function(err, data) {
+        if(err) {
+            res.statusCode = 500;
+            res.json(err);
+            return;
+        }
+
+        if(data.length == 0) {
+            res.statusCode = 404;
+            res.end();
+            return;
+        }
+
+        res.statusCode = 200;
+
+        Contacts.getPicture(data[0], true, function(err, data) {
+            if(err)
+                res.statusCode = 404;
+            else
+                res.statusCode = 200;
+            res.set('Content-Type', 'image/jpeg');
+
+            res.end(data);
+        });
+    });
 });
 
 app.post('/send', function(req, res){

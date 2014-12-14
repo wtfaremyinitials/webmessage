@@ -56,6 +56,9 @@ html {
 .contact img {
     border-radius: 50%;
     float: left;
+    width: 40px;
+    height: 40px;
+    background-color: #a2a2a2;
 }
 
 .contact .info {

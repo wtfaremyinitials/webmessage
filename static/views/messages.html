@@ -5,7 +5,7 @@
         </li>
         <li ng-click="select()" ng-class="{ active: selectedConversation == conversation }" ng-repeat="conversation in conversations">
             <div class="contact">
-                <img src="http://placehold.it/44x44">
+                <img ng-src="/profile.jpg?name={{conversation.name}}">
                 <div class="info">
                     <span class="name">{{ conversation.name }}</span>
                     <span class="time">{{ conversation.time }}</span>

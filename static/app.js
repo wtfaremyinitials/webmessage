@@ -114,7 +114,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
     $scope.add = function() {
         $scope.conversations.push({
             name: prompt('Enter contact name:'),
-            time: "00:00 PM",
+            time: Date.now(),
             messages: []
         })
         $scope.$apply();
@@ -122,17 +122,23 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
 
     $scope.send = function() {
         messages.send($scope.compose, $scope.selectedConversation.name);
+        var time = Date.now();
         $scope.selectedConversation.messages.push({
             text: $scope.compose,
-            time: '', // TODO
+            time: time,
             side: 'you'
         });
+        $scope.selectedConversation.time = time;
         $scope.compose = '';
     };
 
     $scope.select = function() {
         sessionStorage['active'] = this.conversation.name;
         $scope.selectedConversation = this.conversation;
+    };
+
+    $scope.formatTime = function(timestamp) {
+        // Do javascript on it
     };
 
     $scope.$watch('conversations', function(value) {
@@ -147,7 +153,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
             if(conversation.name == data.from.name) {
                 conversation.messages.push({
                     text: data.text,
-                    time: '00:00 PM',
+                    time: data.time,
                     side: 'them'
                 });
                 $scope.$apply();

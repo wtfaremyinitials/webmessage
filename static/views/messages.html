@@ -3,7 +3,7 @@
         <li class="options">
             <button class="new" ng-click="add('Tim Franzen')"></button>
         </li>
-        <li ng-click="select()" ng-class="{ active: selectedConversation == conversation }" ng-repeat="conversation in conversations">
+        <li ng-click="select()" ng-class="{ active: selectedConversation == conversation }" ng-repeat="conversation in conversations | orderBy:'time':true">
             <div class="contact">
                 <img ng-src="/profile.jpg?name={{conversation.name}}">
                 <div class="info">

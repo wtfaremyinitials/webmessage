@@ -199,6 +199,10 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', 'delay'
         $scope.selectedConversation = this.conversation;
     };
 
+    $scope.delete = function() {
+        $scope.conversations.splice($scope.conversations.indexOf(this.conversation), 1);
+    };
+
     $scope.formatTime = datetime.formatTime;
 
     $scope.$watch('conversations', function(value) {

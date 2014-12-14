@@ -10,6 +10,7 @@
                     <span class="name">{{ conversation.name }}</span>
                     <span class="time">{{ formatTime(conversation.time) }}</span>
                     <span class="last">{{ conversation.messages[conversation.messages.length-1].text }}</span>
+                    <div class="delete" ng-click="delete()">X</div>
                 </div>
             </div>
         </li>

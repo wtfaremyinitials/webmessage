@@ -23,10 +23,6 @@ app.use(function(req, res, next) {
 
 app.use(express.static(__dirname + '/static'));
 
-app.get('/auth', function(req, res) {
-    // TODO: Test if the Authentication header is correct
-});
-
 var icon;
 iconutil.toIconset('/Applications/Messages.app/Contents/Resources/Messages.icns', function(err, icons) {
     if(err)
@@ -100,6 +96,10 @@ app.get('/receive', sse, function(req, res) {
     messageEvents.on('received', function(data){
         res.json(data);
     });
+});
+
+app.get('/auth', function(req, res) {
+    // TODO: Test if the Authentication header is correct
 });
 
 app.listen(port);

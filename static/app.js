@@ -161,8 +161,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', functio
             name: prompt('Enter contact name:'),
             time: Date.now(),
             messages: []
-        })
-        $scope.$apply();
+        });
     };
 
     $scope.send = function() {

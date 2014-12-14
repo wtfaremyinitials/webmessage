@@ -47,8 +47,6 @@ app.get('/icon.png', function(req, res) {
 app.get('/profile.jpg', function(req, res) {
     var name = req.query.name;
 
-
-
     Contacts.getContacts({ name: name }, function(err, data) {
         if(err) {
             res.statusCode = 500;

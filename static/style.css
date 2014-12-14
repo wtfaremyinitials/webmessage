@@ -40,7 +40,7 @@ html {
 .conversations li {
     height: 64px;
     width:  100%;
-    cursor: pointer;
+    cursor: default;
 }
 
 .contact {
@@ -170,6 +170,7 @@ html {
     background-image: url('img/compose.png');
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
 
 .indicator-container {
@@ -215,4 +216,8 @@ html {
 
 .conversations>li.active:hover>.contact>.info>.delete {
     color: #FFFFFF;
+}
+
+.delete {
+    cursor: pointer;
 }

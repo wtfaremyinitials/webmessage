@@ -221,6 +221,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', 'delay'
                     time: data.time,
                     side: 'them'
                 });
+                conversation.time = data.time;
                 $scope.$apply();
             }
         });

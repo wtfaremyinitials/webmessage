@@ -68,6 +68,51 @@ webmessage.factory('auth', function() {
     };
 });
 
+webmessage.factory('datetime', [function() {
+
+    Date.prototype.getHours12 = function() {
+        var hours = this.getHours();
+        if(hours > 12)
+            hours -= 12;
+        return hours;
+    };
+
+    Date.prototype.getMeridiem = function() {
+        var hours = this.getHours();
+        return (hours<=12)? 'AM' : 'PM'
+    };
+
+    var pad = function(num, size) {
+        var s = num+"";
+        while (s.length < size) s = "0" + s;
+        return s;
+    }
+
+    var wasToday = function(then) {
+        var now = new Date();
+        return now.getDay()   == then.getDay() && now.getMonth() == then.getMonth() && now.getFullYear() == then.getFullYear();
+    };
+
+    var wasYesterday = function(then) {
+        var now = Date.now();
+        return now.getDay()-1 == then.getDay() && now.getMonth() == then.getMonth() && now.getFullYear() == then.getFullYear();
+    };
+
+    var formatTime = function(timestamp) {
+        var date = new Date(timestamp);
+
+        if(wasToday(date))
+            return pad(date.getHours12(), 2) + ':' + pad(date.getMinutes(), 2) + ' ' + date.getMeridiem();
+        if(wasYesterday(date))
+            return 'Yesterday';
+        return date.getMonth() + '/' +  date.getDate() + '/' + (date.getFullYear() + '').substr(2, 4);
+    };
+
+    return {
+        formatTime: formatTime
+    };
+}]);
+
 webmessage.factory('httpRequestInterceptor', ['auth', function (auth) {
     return {
         request: function (config) {
@@ -103,7 +148,7 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
 
 }]);
 
-webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, messages) {
+webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', function($scope, messages, datetime) {
     $scope.conversations = JSON.parse(localStorage['conversations']);
     $scope.selectedConversation = $scope.conversations[0];
     for(var i=0; i<$scope.conversations.length; i++)
@@ -137,11 +182,7 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
         $scope.selectedConversation = this.conversation;
     };
 
-    $scope.formatTime = function(timestamp) {
-        var date = new Date(timestamp);
-
-        return date.getMonth() + '/' +  date.getDate() + '/' + (date.getFullYear() + '').substr(2, 4);
-    };
+    $scope.formatTime = datetime.formatTime;
 
     $scope.$watch('conversations', function(value) {
         localStorage['conversations'] = angular.toJson(value);

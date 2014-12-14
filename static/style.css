@@ -46,8 +46,8 @@ html {
 .contact {
     margin-left: 20px;
     width: calc(100% - 30px);
-    height: calc(100% - 20px);
-    padding: 10px;
+    height: calc(100% - 16px);
+    padding: 8px;
     padding-left: 0px;
     border-bottom: 1px solid #E3E3E3;
     font-size: 13px;
@@ -56,8 +56,8 @@ html {
 .contact img {
     border-radius: 50%;
     float: left;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: #a2a2a2;
 }
 

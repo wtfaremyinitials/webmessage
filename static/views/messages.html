@@ -1,5 +1,8 @@
 <div class="sidebar">
     <ul class="conversations">
+        <li class="options">
+            <button class="new" ng-click="add('Tim Franzen')"></button>
+        </li>
         <li ng-click="select()" ng-class="{ active: selectedConversation == conversation }" ng-repeat="conversation in conversations">
             <div class="contact">
                 <img src="http://placehold.it/44x44">

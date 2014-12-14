@@ -111,6 +111,15 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
             $scope.selectedConversation = $scope.conversations[i];
     $scope.compose = '';
 
+    $scope.add = function() {
+        $scope.conversations.push({
+            name: prompt('Enter contact name:'),
+            time: "00:00 PM",
+            messages: []
+        })
+        $scope.$apply();
+    };
+
     $scope.send = function() {
         messages.send($scope.compose, $scope.selectedConversation.name);
         $scope.selectedConversation.messages.push({

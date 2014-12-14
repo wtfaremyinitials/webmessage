@@ -200,7 +200,8 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', 'datetime', 'delay'
     };
 
     $scope.delete = function() {
-        $scope.conversations.splice($scope.conversations.indexOf(this.conversation), 1);
+        if(confirm('Are you sure you would like to delete your conversation with ' + this.conversation.name + '?'))
+            $scope.conversations.splice($scope.conversations.indexOf(this.conversation), 1);
     };
 
     $scope.formatTime = datetime.formatTime;

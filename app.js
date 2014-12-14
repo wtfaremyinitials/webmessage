@@ -6,6 +6,8 @@ var sse = require('connect-sse')();
 var iMessage = require('osa-imessage');
 var Contacts = require('osa-contacts');
 
+var iconutil = require('iconutil');
+
 var messageEvents;
 
 var port = process.env.PORT || 5677;
@@ -23,6 +25,23 @@ app.use(express.static(__dirname + '/static'));
 
 app.get('/auth', function(req, res) {
     // TODO: Test if the Authentication header is correct
+});
+
+var icon;
+iconutil.toIconset('/Applications/Messages.app/Contents/Resources/Messages.icns', function(err, icons) {
+    if(err)
+        return;
+    icon = icons['icon_32x32.png'];
+});
+app.get('/icon.png', function(req, res) {
+    if(!icon) {
+        res.statusCode = 404;
+        res.end();
+    }
+
+    res.set('Content-Type', 'image/jpeg');
+    res.statusCode = 200;
+    res.end(icon);
 });
 
 app.get('/profile.jpg', function(req, res) {

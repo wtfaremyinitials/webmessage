@@ -138,7 +138,9 @@ webmessage.controller('MessagesCtrl', ['$scope', 'messages', function($scope, me
     };
 
     $scope.formatTime = function(timestamp) {
-        // Do javascript on it
+        var date = new Date(timestamp);
+
+        return date.getMonth() + '/' +  date.getDate() + '/' + (date.getFullYear() + '').substr(2, 4);
     };
 
     $scope.$watch('conversations', function(value) {

@@ -1,0 +1,9 @@
+<div class="login-wrapper">
+    <div class="login">
+        <h1>webmessage</h1>
+        <input type="text" placeholder="username">
+        <input type="password" placeholder="password" ng-model="password">
+        <button ng-class="{ hidden: loading }" ng-click="login()">Log in</button>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif" ng-class="{ loading: true, on: loading }">
+    </div>
+</div>

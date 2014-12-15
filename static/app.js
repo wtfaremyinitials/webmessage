@@ -149,20 +149,22 @@ webmessage.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
 }]);
 
-webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope) {
+webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope, auth) {
 
-    $scope.login = function(password) {
-        auth.setPassword(password);
+    $scope.loading = false;
+    $scope.password = '';
 
-        // TODO: Show spinner
+    $scope.login = function() {
+        auth.setPassword($scope.password);
+        $scope.loading = true;
 
-        auth.testPassword(function() {
-            // TODO: Stop spinner
-
-            // if(auth.isLoggedIn())
-            //    redirect()
-            // else
-            //    shake()
+        auth.testPassword().then(function(success) {
+            $scope.loading = false;
+            if(success) {
+                // Redirect user
+            } else {
+                // Wrong password
+            }
         });
     };
 

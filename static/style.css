@@ -9,6 +9,10 @@ html {
     margin: 0px;
 }
 
+.hidden {
+    display: none;
+}
+
 .active {
     background-color: #4094F7;
 }
@@ -220,4 +224,70 @@ html {
 
 .delete {
     cursor: pointer;
+}
+
+/* Start login page */
+
+.login-wrapper {
+    background-color: #d1fffb;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.login {
+    width: 360px;
+    height: 360px;
+    border-radius: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+    position: relative;
+    top: 150px;
+}
+
+.login h1 {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    position: relative;
+    top:  30px;
+    left: 85px;
+}
+
+.login input {
+    border: 0;
+    border-bottom: 1px solid #E3E3E3;
+    width: 80%;
+    height: 15%;
+    position: relative;
+    top: 50px;
+    left: 35px;
+    font-size: 30px;
+}
+
+.login button {
+    width: 150px;
+    height: 70px;
+    border: 1px solid #E3E3E3;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    position: relative;
+    top: 75px;
+    left: 100px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.loading {
+    display: none;
+    margin: 0;
+    position: relative;
+    top: 90px;
+    left: 160px;
+}
+
+.loading.on {
+    display: block !important;
 }

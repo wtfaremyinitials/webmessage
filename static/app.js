@@ -149,7 +149,7 @@ webmessage.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
 }]);
 
-webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope, auth) {
+webmessage.controller('LoginCtrl', ['$scope', '$location', 'auth', function($scope, $location, auth) {
 
     $scope.loading = false;
     $scope.password = '';
@@ -161,9 +161,9 @@ webmessage.controller('LoginCtrl', ['$scope', 'auth', function($scope, auth) {
         auth.testPassword().then(function(success) {
             $scope.loading = false;
             if(success) {
-                // Redirect user
+                $location.path('/messages').replace();
             } else {
-                // Wrong password
+                alert('Incorrect password');
             }
         });
     };

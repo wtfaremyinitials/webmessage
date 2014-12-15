@@ -12,6 +12,8 @@ var messageEvents;
 
 var port = process.env.PORT || 5677;
 
+var password = process.env.PASSWORD || 'password';
+
 app.use(require('body-parser').json());
 app.use(require('body-parser').urlencoded({ extended: true }));
 
@@ -64,9 +66,21 @@ app.get('/profile.jpg', function(req, res) {
     });
 });
 
-app.post('/send', function(req, res){
-    // TODO: Test if the Authentication header is correct
+var checkAuth = function(req, res, next) {
+    if(req.headers.authentication == password) {
+        next();
+    } else {
+        res.statusCode = 403;
+        res.json({ auth: false });
+    }
+};
 
+app.get('/auth', checkAuth, function(req, res) {
+    res.statusCode = 200;
+    res.json({ auth: true });
+});
+
+app.post('/send', checkAuth, function(req, res){
     var to = req.body.to;
     var message = req.body.message;
 
@@ -86,14 +100,10 @@ app.post('/send', function(req, res){
     });
 });
 
-app.get('/receive', sse, function(req, res) {
+app.get('/receive', checkAuth, sse, function(req, res) {
     messageEvents.on('received', function(data){
         res.json(data);
     });
-});
-
-app.get('/auth', function(req, res) {
-    // TODO: Test if the Authentication header is correct
 });
 
 app.listen(port);

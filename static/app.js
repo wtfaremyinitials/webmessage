@@ -62,7 +62,8 @@ webmessage.factory('auth', function() {
     return {
         testPassword: testPassword,
         setPassword: setPassword,
-        getPassword: getPassword
+        getPassword: getPassword,
+        isLoggedIn: isLoggedIn
     };
 });
 
@@ -92,7 +93,7 @@ webmessage.factory('datetime', [function() {
     };
 
     var wasYesterday = function(then) {
-        var now = Date.now();
+        var now = new Date();
         return now.getDay()-1 == then.getDay() && now.getMonth() == then.getMonth() && now.getFullYear() == then.getFullYear();
     };
 
@@ -125,7 +126,7 @@ webmessage.factory('delay', ['$timeout', function($timeout) {
 webmessage.factory('httpRequestInterceptor', ['auth', function (auth) {
     return {
         request: function (config) {
-            if(auth.isLoggedIn)
+            if(auth.isLoggedIn())
                 config.headers['Authentication'] = auth.getPassword();
             if(config.method == 'POST')
                 config.headers['Content-Type']   = 'application/json';

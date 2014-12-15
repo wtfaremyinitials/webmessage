@@ -36,15 +36,25 @@ webmessage.factory('messages', ['$http', function($http) {
     };
 }]);
 
-webmessage.factory('auth', function() {
+webmessage.factory('auth', [function() {
     var loggedIn = false;
     sessionStorage.password = '';
 
-    var testPassword = function(cb) {
-        // TODO: Hit the /auth endpoint
+    var check = function(response) {
+        if(response.status == 200) {
+            loggedIn = true;
+            return true;
+        }
+        return false;
+    };
 
-        // loggedIn = success;
-        // cb();
+    // hack to get around circular dependency
+    var $http;
+
+    var testPassword = function(cb) {
+        if(!$http)
+            $http = angular.element(document.body).injector().get('$http');
+        return $http.get('/auth').then(check).catch(check);
     };
 
     var setPassword = function(pass) {
@@ -56,7 +66,7 @@ webmessage.factory('auth', function() {
     };
 
     var isLoggedIn = function() {
-        return loggedIn;
+        return !!sessionStorage.password;
     };
 
     return {
@@ -65,7 +75,7 @@ webmessage.factory('auth', function() {
         getPassword: getPassword,
         isLoggedIn: isLoggedIn
     };
-});
+}]);
 
 webmessage.factory('datetime', [function() {
 

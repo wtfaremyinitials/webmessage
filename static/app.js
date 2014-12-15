@@ -159,12 +159,12 @@ webmessage.controller('LoginCtrl', ['$scope', '$location', 'auth', function($sco
         $scope.loading = true;
 
         auth.testPassword().then(function(success) {
-            $scope.loading = false;
             if(success) {
                 $location.path('/messages').replace();
             } else {
                 alert('Incorrect password');
             }
+            $scope.loading = false;
         });
     };
 

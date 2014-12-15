@@ -194,7 +194,7 @@ html {
 
 .indicator.done {
     width: 100%;
-    transition: width: 0.2s;
+    transition: width 0.2s;
 }
 
 .delete {
